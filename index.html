@@ -1,0 +1,188 @@
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+       <title> balaji scan centre </title>
+          <style>
+                  #register-form
+                   {
+                    width:800px;
+                    background-color:white;
+                    padding:25px;
+                    margin-left:auto;
+                    margin-right:auto;
+                    border-radius: 25px;
+                   }
+                    .input-label 
+                    {
+                      margin:0;
+                      margin-bottom:4px;
+                      margin-top:12px;
+                      margin-left:0;
+                      font-size:20;
+                      padding:10px;
+                    }
+                    .input
+                    {
+                      margin-top:5px;
+                      margin-left:120;
+                      font-size:15px;
+                    }
+                    .input-type
+                    {
+                    width:70%;
+                    padding:15px;
+                    font-size:16;                   
+                    }
+                    .button 
+                    {
+                    background-color: #308d33; /* Green */
+                    border: none;
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    padding:10px;
+                    margin-top:12px;
+                    cursor: pointer;
+                    }
+                    .heading
+                    {
+                      font-size:38;
+                    }
+                    .hidden
+                    {
+                    display: none;
+                    }
+                    #overlay
+                    {
+                    position: fixed;
+                    display: none;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba(0,0,0,0.5);
+                    z-index: 2;
+                    cursor: pointer;
+                    }
+                    #image
+                    {
+                    padding-top:325;
+                    }
+                    .sub
+                    {
+                    font-size:22;
+                    }
+
+                    body
+                    {
+                      background-image: url("Milky1.jpg");
+                      background-size: cover;
+                    }
+                    
+                  
+                    
+ 
+          </style>
+  </head>
+  <body>
+    <form method="post" autocomplete="on" name="google-sheet" id = "register-form">
+
+       <div>
+       <center><img src="1.jpg" height="140" width="280"</center>
+      </div>
+
+      <div>
+       <center><h1 class="heading">BALAJI SCAN CENTRE</h1></center>
+       <center><p class = "sub">#193,194,60 ft main road, mei layout (arch) road Bagalagunte,Bangalore-73.<hr></p></center>
+      </div>
+
+      <div class = "input-label">
+       <center><input class="input-type" type="text"name="            Patient name" placeholder="Patient name *" value="" required=""/><center>
+      </div>
+
+      <div class = "input-label">
+       <center><input class="input-type" type="number"  name="             Age" placeholder="Your age *" min="1" max="90" value="" required=""/></center>
+      </div>
+
+      <div class = "input-label" >
+       <center><input class = "input-type" list = "Gender" placeholder="Please select your gender*"name = "              Gender"required=""/></center>
+       <datalist id="Gender">
+         <option value ="Male">
+         <option value ="Female">
+       </datalist>
+      </div>
+
+      <div class = "input-label">
+       <center><input class="input-type"type="tel" name="         Phone number" placeholder="Your phone number*" value="" required=""/></center>
+      </div>
+
+      <div  class = "input-label">
+       <center><input class="input-type"type="text" name="                       Referal doctor"placeholder="Referal doctor"  value="" /></center>
+       <p class="input">clinic name / doctor name</p>
+      </div>
+
+      <div  class = "input-label">
+       <center><input class="input-type"type="date"  name="                     Appointment" placeholder="Appointment*" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"value="" /></center>
+       <p class="input">choose a date for an appointment</p>
+      </div>
+
+
+
+      <div class="#">
+        <center> <input type="submit" class="button" value="Submit" name="submit" style="display: block;" id="then">
+        <input type="button" class="button" value="Please Wait" style="display: none; background-color: #ff0000;"id="now">
+        <input type="button" class="button" value="Submitted" style="display: none; background-color: #007cbf;"  id="after"> </center>
+      </div>
+
+
+      <div class="hidden">
+       <input type="date" name="         Date" id="date">
+       <input type="text" name="Time" id="time">
+      </div>
+    
+      <script>
+          const scriptURL = 'https://script.google.com/macros/s/AKfycbyqMpxOFfBFvRv7L1sso7UXUcFKjOWIywoxR-_-OsTwwN0tHBq08lXRvPN1tJY2ncIP/exec'
+          const form = document.forms['google-sheet']
+
+          document.addEventListener('submit',e =>{
+          e.preventDefault()
+          document.getElementById("then").style.display = "none"
+          document.getElementById("now").style.display = "block"
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => alert('Thank You '))
+          .then(response => document.getElementById("now").style.display = "none")
+          .then(response => document.getElementById("after").style.display = "block")
+          .catch(error => console.error('Error!', error.message))
+      })
+        </script>
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+
+          var field = document.querySelector('#date');
+          var date = new Date();
+
+          field.value = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + date.getDate().toString().padStart(2, 0);
+
+          var field = document.querySelector('#time');
+          var date = new Date();
+
+          field.value = date.getHours().toString() + ':' + (date.getMinutes() + 1).toString().padStart(2, 0) + ':' + date.getSeconds().toString().padStart(2, 0)
+      </script>
+
+    
+
+    </form>
+  </body>
+</html>
